@@ -1,5 +1,10 @@
 package todo;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +13,7 @@ public class GestorTareas {
     private final List<Tarea> tareas = new ArrayList<>();
     private int siguienteId = 1;
 
+
     public Tarea añadirTarea(String descripcion, String prioridad) {
         Tarea tarea = new Tarea(siguienteId, descripcion, prioridad);
         siguienteId++;
@@ -15,6 +21,7 @@ public class GestorTareas {
         return tarea;
     }
 
+    // Metodo para obtener pendientes
     public List<Tarea> obtenerPendientes() {
         List<Tarea> pendientes = new ArrayList<>();
         for (Tarea tarea : tareas) {
@@ -29,7 +36,6 @@ public class GestorTareas {
         return new ArrayList<>(tareas);
     }
 
-    // Método nuevo para filtrar por prioridad
     public List<Tarea> obtenerPorPrioridad(String prioridad) {
         List<Tarea> filtradas = new ArrayList<>();
         for (Tarea tarea : tareas) {
@@ -69,5 +75,32 @@ public class GestorTareas {
             }
         }
         return null;
+    }
+
+    // Métodos para el archivo ListadoTareas.txt
+    public boolean guardarEnArchivo() {
+        String nombreArchivo = "ListadoTareas.txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
+            for (Tarea tarea : tareas) {
+                writer.write(tarea.toString());
+                writer.newLine();
+            }
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    public boolean cargarDesdeArchivo() {
+        String nombreArchivo = "ListadoTareas.txt";
+        try (BufferedReader reader = new BufferedReader(new FileReader(nombreArchivo))) {
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                System.out.println(linea);
+            }
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
     }
 }
