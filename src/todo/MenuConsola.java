@@ -93,7 +93,7 @@ public class MenuConsola {
         }
 
         mostrarPendientes();
-        int id = leerId("Id de la tarea a completar: ");
+        int id = leerId("ID de la tarea a completar: "); // Cambio de minúscula a mayúscula
         if (id == -1) {
             return;
         }
@@ -101,7 +101,7 @@ public class MenuConsola {
         if (gestor.completarTarea(id)) {
             System.out.println("Tarea #" + id + " marcada como completada.");
         } else {
-            System.out.println("No existe ninguna tarea con el id " + id + ".");
+            System.out.println("No existe ninguna tarea con el ID " + id + "."); // Cambio de minúscula a mayúscula
         }
     }
 
@@ -112,7 +112,7 @@ public class MenuConsola {
         }
 
         mostrarTodas();
-        int id = leerId("id de la tarea a eliminar: ");
+        int id = leerId("ID de la tarea a eliminar: "); // Cambio de minúscula a mayúscula
         if (id == -1) {
             return;
         }
@@ -120,7 +120,7 @@ public class MenuConsola {
         if (gestor.eliminarTarea(id)) {
             System.out.println("Tarea #" + id + " eliminada.");
         } else {
-            System.out.println("no existe ninguna tarea con el id " + id + ".");
+            System.out.println("No existe ninguna tarea con el ID " + id + "."); // Cambio de minúscula a mayúscula
         }
     }
 
@@ -130,7 +130,7 @@ public class MenuConsola {
         try {
             return Integer.parseInt(entrada);
         } catch (NumberFormatException e) {
-            System.out.println("introducir un numero.");
+            System.out.println("Introducir un numero."); // Cambio de minúscula a mayúscula
             return -1;
         }
     }
