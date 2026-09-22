@@ -10,7 +10,8 @@ Las tareas se guardan en memoria, es decir, se pierden al cerrar el programa.
 - Marcar una tarea como completada.
 - Eliminar una tarea.
 - Ver todas las tareas (pendientes y completadas).
-
+- Hemos añadido prioridades a las tareas.
+- Guardar en un txt el listado de tareas.
 
 # desde inteliji idea
 
@@ -36,6 +37,8 @@ Al arrancar aparece un menú; se escribe el número de la opción y se pulsa Ent
 3. Marcar tarea como completada
 4. Eliminar tarea
 5. Ver todas las tareas
+6. Filtrar tareas por prioridad
+7. Guardar tareas en archivo
 0. Salir
 
 Cada tarea tiene un id numérico, que es el que se pide para completarla o
