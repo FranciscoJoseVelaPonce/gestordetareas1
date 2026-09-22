@@ -8,8 +8,8 @@ public class GestorTareas {
     private final List<Tarea> tareas = new ArrayList<>();
     private int siguienteId = 1;
 
-    public Tarea anadirTarea(String descripcion) {
-        Tarea tarea = new Tarea(siguienteId, descripcion);
+    public Tarea añadirTarea(String descripcion, String prioridad) {
+        Tarea tarea = new Tarea(siguienteId, descripcion, prioridad);
         siguienteId++;
         tareas.add(tarea);
         return tarea;
@@ -37,7 +37,6 @@ public class GestorTareas {
         tarea.marcarComoCompletada();
         return true;
     }
-
 
     public boolean eliminarTarea(int id) {
         Tarea tarea = buscarPorId(id);

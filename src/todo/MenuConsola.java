@@ -22,41 +22,43 @@ public class MenuConsola {
             String opcion = scanner.nextLine().trim();
 
             switch (opcion) {
-                case "1" -> anadirTarea();
+                case "1" -> añadirTarea();
                 case "2" -> mostrarPendientes();
                 case "3" -> completarTarea();
                 case "4" -> eliminarTarea();
                 case "5" -> mostrarTodas();
                 case "0" -> salir = true;
-                default -> System.out.println("Opcion no valida. Introduce un numero del 0 al 5.");
+                default -> System.out.println("Opción no válida. Introduce un número del 0 al 5.");
             }
         }
 
-        System.out.println("Hasta luego!");
+        System.out.println("¡Hasta luego!");
     }
 
     private void mostrarMenu() {
         System.out.println();
         System.out.println("---------------------------------");
-        System.out.println("1. Anadir tarea");
+        System.out.println("1. Añadir tarea");
         System.out.println("2. Ver tareas pendientes");
         System.out.println("3. Marcar tarea como completada");
         System.out.println("4. Eliminar tarea");
         System.out.println("5. Ver todas las tareas");
         System.out.println("0. Salir");
-        System.out.print("Elige una opcion: ");
+        System.out.print("Elige una opción: ");
     }
 
-    private void anadirTarea() {
-        System.out.print("Descripcion de la tarea: ");
+    private void añadirTarea() {
+        System.out.print("Descripción de la tarea: ");
         String descripcion = scanner.nextLine().trim();
 
         if (descripcion.isEmpty()) {
-            System.out.println("La descripcion no puede estar vacia. Tarea no creada.");
+            System.out.println("La descripción no puede estar vacía. Tarea no creada.");
             return;
         }
 
-        Tarea tarea = gestor.anadirTarea(descripcion);
+        String prioridad = leerPrioridad();
+
+        Tarea tarea = gestor.añadirTarea(descripcion, prioridad);
         System.out.println("Tarea creada: " + tarea);
     }
 
@@ -76,7 +78,7 @@ public class MenuConsola {
     private void mostrarTodas() {
         List<Tarea> todas = gestor.obtenerTodas();
         if (todas.isEmpty()) {
-            System.out.println("Todavia no hay tareas.");
+            System.out.println("Todavía no hay tareas.");
             return;
         }
 
@@ -88,7 +90,7 @@ public class MenuConsola {
 
     private void completarTarea() {
         if (gestor.estaVacio()) {
-            System.out.println("Todavia no hay tareas.");
+            System.out.println("Todavía no hay tareas.");
             return;
         }
 
@@ -107,7 +109,7 @@ public class MenuConsola {
 
     private void eliminarTarea() {
         if (gestor.estaVacio()) {
-            System.out.println("Todavia no hay tareas.");
+            System.out.println("Todavía no hay tareas.");
             return;
         }
 
@@ -124,13 +126,24 @@ public class MenuConsola {
         }
     }
 
+    private String leerPrioridad() {
+        while (true) {
+            System.out.print("Introduce la prioridad (alta, media, baja): ");
+            String entrada = scanner.nextLine().trim().toLowerCase();
+            if (entrada.equals("alta") || entrada.equals("media") || entrada.equals("baja")) {
+                return entrada;
+            }
+            System.out.println("Prioridad no válida. Debe ser alta, media o baja.");
+        }
+    }
+
     private int leerId(String mensaje) {
         System.out.print(mensaje);
         String entrada = scanner.nextLine().trim();
         try {
             return Integer.parseInt(entrada);
         } catch (NumberFormatException e) {
-            System.out.println("Introducir un numero."); // Cambio de minúscula a mayúscula
+            System.out.println("Introducir un número."); // Cambio de minúscula a mayúscula
             return -1;
         }
     }
