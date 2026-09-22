@@ -29,6 +29,17 @@ public class GestorTareas {
         return new ArrayList<>(tareas);
     }
 
+    // Método nuevo para filtrar por prioridad
+    public List<Tarea> obtenerPorPrioridad(String prioridad) {
+        List<Tarea> filtradas = new ArrayList<>();
+        for (Tarea tarea : tareas) {
+            if (tarea.getPrioridad().equalsIgnoreCase(prioridad)) {
+                filtradas.add(tarea);
+            }
+        }
+        return filtradas;
+    }
+
     public boolean completarTarea(int id) {
         Tarea tarea = buscarPorId(id);
         if (tarea == null) {

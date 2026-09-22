@@ -27,8 +27,9 @@ public class MenuConsola {
                 case "3" -> completarTarea();
                 case "4" -> eliminarTarea();
                 case "5" -> mostrarTodas();
+                case "6" -> filtrarPorPrioridad(); // Opción añadida
                 case "0" -> salir = true;
-                default -> System.out.println("Opción no válida. Introduce un número del 0 al 5.");
+                default -> System.out.println("Opción no válida. Introduce un número del 0 al 6.");
             }
         }
 
@@ -43,6 +44,7 @@ public class MenuConsola {
         System.out.println("3. Marcar tarea como completada");
         System.out.println("4. Eliminar tarea");
         System.out.println("5. Ver todas las tareas");
+        System.out.println("6. Filtrar tareas por prioridad"); // Nueva opción en el menú
         System.out.println("0. Salir");
         System.out.print("Elige una opción: ");
     }
@@ -88,6 +90,27 @@ public class MenuConsola {
         }
     }
 
+    // Método nuevo para consultar tareas filtradas por prioridad
+    private void filtrarPorPrioridad() {
+        if (gestor.estaVacio()) {
+            System.out.println("Todavía no hay tareas.");
+            return;
+        }
+
+        String prioridad = leerPrioridad();
+        List<Tarea> filtradas = gestor.obtenerPorPrioridad(prioridad);
+
+        if (filtradas.isEmpty()) {
+            System.out.println("No hay tareas con prioridad " + prioridad + ".");
+            return;
+        }
+
+        System.out.println("Tareas con prioridad " + prioridad.toUpperCase() + ":");
+        for (Tarea tarea : filtradas) {
+            System.out.println("  " + tarea);
+        }
+    }
+
     private void completarTarea() {
         if (gestor.estaVacio()) {
             System.out.println("Todavía no hay tareas.");
@@ -95,7 +118,7 @@ public class MenuConsola {
         }
 
         mostrarPendientes();
-        int id = leerId("ID de la tarea a completar: "); // Cambio de minúscula a mayúscula
+        int id = leerId("ID de la tarea a completar: ");
         if (id == -1) {
             return;
         }
@@ -103,7 +126,7 @@ public class MenuConsola {
         if (gestor.completarTarea(id)) {
             System.out.println("Tarea #" + id + " marcada como completada.");
         } else {
-            System.out.println("No existe ninguna tarea con el ID " + id + "."); // Cambio de minúscula a mayúscula
+            System.out.println("No existe ninguna tarea con el ID " + id + ".");
         }
     }
 
@@ -114,7 +137,7 @@ public class MenuConsola {
         }
 
         mostrarTodas();
-        int id = leerId("ID de la tarea a eliminar: "); // Cambio de minúscula a mayúscula
+        int id = leerId("ID de la tarea a eliminar: ");
         if (id == -1) {
             return;
         }
@@ -122,7 +145,7 @@ public class MenuConsola {
         if (gestor.eliminarTarea(id)) {
             System.out.println("Tarea #" + id + " eliminada.");
         } else {
-            System.out.println("No existe ninguna tarea con el ID " + id + "."); // Cambio de minúscula a mayúscula
+            System.out.println("No existe ninguna tarea con el ID " + id + ".");
         }
     }
 
@@ -143,7 +166,7 @@ public class MenuConsola {
         try {
             return Integer.parseInt(entrada);
         } catch (NumberFormatException e) {
-            System.out.println("Introducir un número."); // Cambio de minúscula a mayúscula
+            System.out.println("Introducir un número.");
             return -1;
         }
     }
